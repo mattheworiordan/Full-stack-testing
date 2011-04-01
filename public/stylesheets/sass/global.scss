@@ -5,3 +5,55 @@ body {
 h1 {
   font-size: 140%;
 }
+.flash-error {
+  border: 1px solid red;
+  padding: 0.5em;
+  margin-bottom: 1em;
+  font-weight: bold;
+  color: red;
+  background-color: lighten(red, 45%);
+}
+$calc_width: 340px;
+#calculator {
+  border: 1px solid #999;
+  padding: 4px;
+  width: $calc_width;
+  overflow: hidden;
+  margin-bottom: 1em;
+  .value {
+    border: 1px solid black;
+    background-color: #FF9;
+    padding: 4px;
+    width: $calc_width - 10px;
+    text-align: right;
+    margin-bottom: 5px;
+  }
+  label {
+    width: 120px;
+    display: block;
+    float: left;
+    clear: left;
+  }
+  .actions {
+    margin-left: 120px;
+    input[type=submit]:last-child {
+      margin-left: 62px;
+    }
+  }
+  input[type=text] {
+    width: 112px;
+    text-align: right;
+  }
+  ul.history {
+    list-style: none;
+    margin: -5px 0 0.5em 0;
+    overflow: hidden;
+    background-color: #DDD;
+    li {
+      text-align: right;
+      color: #333;
+      font-size: 85%;
+      padding-right: 5px;
+    }
+  }
+}

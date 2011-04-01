@@ -4,3 +4,47 @@ body {
 
 h1 {
   font-size: 140%; }
+
+.flash-error {
+  border: 1px solid red;
+  padding: 0.5em;
+  margin-bottom: 1em;
+  font-weight: bold;
+  color: red;
+  background-color: #ffe5e5; }
+
+#calculator {
+  border: 1px solid #999;
+  padding: 4px;
+  width: 340px;
+  overflow: hidden;
+  margin-bottom: 1em; }
+  #calculator .value {
+    border: 1px solid black;
+    background-color: #FF9;
+    padding: 4px;
+    width: 330px;
+    text-align: right;
+    margin-bottom: 5px; }
+  #calculator label {
+    width: 120px;
+    display: block;
+    float: left;
+    clear: left; }
+  #calculator .actions {
+    margin-left: 120px; }
+    #calculator .actions input[type=submit]:last-child {
+      margin-left: 62px; }
+  #calculator input[type=text] {
+    width: 112px;
+    text-align: right; }
+  #calculator ul.history {
+    list-style: none;
+    margin: -5px 0 0.5em 0;
+    overflow: hidden;
+    background-color: #DDD; }
+    #calculator ul.history li {
+      text-align: right;
+      color: #333;
+      font-size: 85%;
+      padding-right: 5px; }
