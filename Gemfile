@@ -13,4 +13,5 @@ group :test do
   gem 'cucumber-rails', '>=0.4.0'
   gem 'capybara'
   gem 'database_cleaner'
+  gem 'spork', '~> 0.9.0.rc'
 end

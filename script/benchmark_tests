@@ -1,0 +1,31 @@
+#!/usr/bin/env ruby
+
+require 'benchmark'
+
+# Test RSpec
+
+time = Benchmark.measure do
+  system('rspec spec/**/*')
+end
+puts "\n-- RSpec without spork took: #{format('%0.2f', time.real)}s --\n"
+
+spork_time = Benchmark.measure do
+  system('rspec --drb spec/**/*')
+end
+puts "\n-- RSpec with spork (DRB) took: #{format('%0.2f', spork_time.real)}s --\n"
+
+puts "\n-- Spork saved #{format('%0.2f', time.real - spork_time.real)}s when running RSpec --\n"
+
+# Test Cucumber
+
+time = Benchmark.measure do
+  system('script/cucumber')
+end
+puts "\n-- Cucumber without spork took: #{format('%0.2f', time.real)}s --\n"
+
+spork_time = Benchmark.measure do
+  system('script/cucumber --drb')
+end
+puts "\n-- Cucumber with spork (DRB) took: #{format('%0.2f', spork_time.real)}s --\n"
+
+puts "\n-- Spork saved #{format('%0.2f', time.real - spork_time.real)}s when running Cucumber --\n"

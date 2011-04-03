@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+
+puts "Starting spork servers"
+
+`bundle exec spork cucumber & bundle exec spork rspec &`
