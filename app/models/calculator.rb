@@ -20,4 +20,12 @@ class Calculator
   def divide(val)
     @value = @value / val
   end
+
+  def sqrt
+    @value = Math.sqrt(@value).to_i
+  end
+
+  def square
+    @value = @value ** 2
+  end
 end

@@ -58,4 +58,20 @@ describe Calculator do
       expect { Calculator.new.divide(0).should }.to raise_error(ZeroDivisionError)
     end
   end
+
+  describe '#square root' do
+    it 'returns 3 when square rooting a calculator with a value of 9' do
+      calc = Calculator.new(9)
+      calc.sqrt
+      calc.value.should == 3
+    end
+  end
+
+  describe '#square' do
+    it 'returns 16 when squaring a calculator with a value of 4' do
+      calc = Calculator.new(4)
+      calc.square
+      calc.value.should == 16
+    end
+  end
 end

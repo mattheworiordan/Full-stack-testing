@@ -1,9 +1,13 @@
 body {
   font-family: sans-serif;
-  font-size: 100%;
+  font-size: 90%;
 }
 h1 {
   font-size: 140%;
+}
+h2 {
+  font-size: 110%;
+  margin-top: 0;
 }
 .flash-error {
   border: 1px solid red;
@@ -13,13 +17,14 @@ h1 {
   color: red;
   background-color: lighten(red, 45%);
 }
+
 $calc_width: 340px;
 #calculator {
   border: 1px solid #999;
   padding: 4px;
   width: $calc_width;
-  overflow: hidden;
   margin-bottom: 1em;
+  float: left;
   .value {
     border: 1px solid black;
     background-color: #FF9;
@@ -36,9 +41,6 @@ $calc_width: 340px;
   }
   .actions {
     margin-left: 120px;
-    input[type=submit]:last-child {
-      margin-left: 62px;
-    }
   }
   input[type=text] {
     width: 112px;
@@ -56,4 +58,50 @@ $calc_width: 340px;
       padding-right: 5px;
     }
   }
+  .actions, .operations {
+    input[type=submit], button {
+      width: 35px;
+      margin: 0 10px 10px 0;
+    }
+  }
+  #numbers-container {
+    .buttons {
+      width: 180px;
+      margin-left: 120px;
+    }
+    button {
+      width: 50px;
+      margin: 0 10px 10px 0;
+      &:last-child {
+        width: 170px;
+      }
+    }
+  }
+}
+
+#memory-bank {
+  margin-left: $calc_width + 40px;
+  border: 1px solid #999;
+  background-color: #EEE;
+  width: 200px;
+  padding: 10px;
+  p {
+    font-size: 80%;
+    color: #666;
+  }
+  &.active-for-drop {
+    background-color: #FFD;
+  }
+  &.hover-for-drop {
+    background-color: #FF0;
+  }
+}
+
+.home-links {
+  clear: left;
+}
+
+#dialog-confirm {
+  display: none;
+  font-size: 75%;
 }

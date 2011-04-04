@@ -1,42 +1,56 @@
 <h1>Integer Calculator</h1>
+<p>Please note this calculator is built specifically to experiment with front end testing techniques.  It is not particularly intuitive and requires you to enter the number before you use an operator</p>
 
+<div id="message-holder">
 <% if flash[:error] %>
   <div class="flash-error">
     <%= flash[:error] %>
   </div>
 <% end %>
+</div>
+
 <div id="calculator">
   <div class="value">
     <%= @calculator.value %>
   </div>
-  <% if @history %>
-    <ul class="history">
+  <ul class="history">
+    <% if @history %>
       <% @history.each do |history| %>
         <li><%= history %></li>
       <% end %>
-    </ul>
   <% end %>
+  </ul>
   <%= form_tag calculator_path, :method => 'PUT' do %>
   <%= hidden_field_tag 'value', @calculator.value %>
   <%= hidden_field_tag 'history', (@history || []).join('|') %>
-  <div>
+  <div id="modify-value-text-field-area">
     <%= label_tag 'modify_value', 'Modify value' %>
     <%= text_field_tag 'modify_value', 0, :autocomplete => 'off' %>
   </div>
   <div>
     <%= label_tag 'operation', 'Operation' %>
     <div class="operations">
-      <%= submit_tag '+', :name => 'method' %>
-      <%= submit_tag '-', :name => 'method' %>
-      <%= submit_tag '*', :name => 'method' %>
-      <%= submit_tag '/', :name => 'method' %>
+      <%= submit_tag '+', :name => 'method' %><%= submit_tag '-', :name => 'method' %><%= submit_tag '*', :name => 'method' %><%= submit_tag '/', :name => 'method' %>
     </div>
-    <div class="actions">
-      <%= submit_tag '=', :name => 'method' %>
-      <%= submit_tag 'C', :name => 'method' %>
-    </div>
+    <div class="actions"><%= submit_tag '=', :name => 'method' %><%= submit_tag 'C', :name => 'method' %></div>
   </div>
   <% end %>
 </div>
 
-<%= link_to 'Home', root_path %>
+<div id="memory-bank">
+  <h2>Memory bank</h2>
+  <p>Drag the yellow value into this area if you would like to store it.</p>
+  <ul class="entries">
+  </ul>
+</div>
+
+<div class="home-links">
+  <%= link_to 'Home', root_path %>
+</div>
+
+<div id="dialog-confirm" class="dialog" title="Clear history and value?"}
+  <p>
+    <span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>
+    Are you sure you want to clear the calculator and history?
+  </p>
+</div>
