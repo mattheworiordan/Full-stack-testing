@@ -88,7 +88,7 @@ def run_feature(feature)
 end
 
 def run_all_features
-  run_feature '/features'
+  run_feature 'features'
 end
 
 def run_suite
@@ -122,6 +122,7 @@ watch('spec/.*_spec\.rb') { |m| run_spec m[0] }
 watch('spec/.*\.rb') { |m| run_spec m[0] }
 watch('app/.*\.rb') { |m| related_specs(m[0]).map {|tf| run_spec tf } }
 watch('features/support/.*') { |m| run_all_features }
+watch('features/step_definitions/.*') { |m| run_all_features }
 watch('features/.*\.feature') { |m| run_feature m[0] }
 
 puts File.expand_path(File.dirname(__FILE__))
