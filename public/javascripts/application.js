@@ -2,11 +2,13 @@ $(document).ready(function() {
   if ($(document).find('#calculator').length) {
     // set up the Javascript calculator methods
     var calculator = new Calculator();
+    $('#calculator').data('engine', calculator);
     $('<div id="numbers-container"><label>Numbers</label><div class="buttons"></div>').insertAfter('#modify-value-text-field-area');
     calculator.insertNumericButtonsIntoDom($('#numbers-container .buttons'));
     calculator.insertOperationButtonsIntoDom($('#calculator .actions'));
 
     var calculatorStorage = new CalculatorStorage('#memory-bank', '#calculator .value');
+    $('#calculator').data('storage', calculatorStorage);
     calculatorStorage.setupDropTarget();
 
     // add a dialog box action to the C button so we can test this

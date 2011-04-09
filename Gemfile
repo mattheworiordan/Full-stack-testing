@@ -14,4 +14,8 @@ group :test do
   gem 'capybara'
   gem 'database_cleaner'
   gem 'spork', '~> 0.9.0.rc'
+  gem 'launchy'
+  gem 'akephalos'
+  gem 'selenium'
+  gem 'selenium-client'
 end

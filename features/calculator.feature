@@ -46,3 +46,25 @@ Feature: Calculator
     When I press "C"
     Then I should see "0" within ".value"
       And I should not be shown any calculator history
+
+  @javascript
+  Scenario: Use the Javascript based functions
+    Given I am on the calculator page
+    When I press "2"
+      And I press "5"
+      And I press "+"
+    Then I should see "25" within ".value"
+    When I press "√"
+      Then I should see "5" within ".value"
+
+  @selenium
+  Scenario: Test a JQuery UI dialog
+    Given I am on the calculator page
+    When I press "2"
+      And I press "+"
+    Then I should see "2" within ".value"
+    When I press "C"
+    Then I should see "Are you sure you want to clear the calculator and history?" within "#dialog-confirm"
+    When I press "Yes"
+    Then I should see "0" within ".value"
+      And I should not see "2" within ".history"

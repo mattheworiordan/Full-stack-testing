@@ -15,12 +15,11 @@
 #
 # * http://benmabey.com/2008/05/19/imperative-vs-declarative-scenarios-in-user-stories.html
 # * http://dannorth.net/2011/01/31/whose-domain-is-it-anyway/
-# * http://elabs.se/blog/15-you-re-cuking-it-wrong 
+# * http://elabs.se/blog/15-you-re-cuking-it-wrong
 #
 
-require 'rubygems'
 require 'spork'
- 
+
 Spork.prefork do
   require 'cucumber/rails'
 
@@ -32,11 +31,11 @@ Spork.prefork do
   Capybara.default_selector = :css
 
 end
- 
+
 Spork.each_run do
   # By default, any exception happening in your Rails application will bubble up
-  # to Cucumber so that your scenario will fail. This is a different from how 
-  # your application behaves in the production environment, where an error page will 
+  # to Cucumber so that your scenario will fail. This is a different from how
+  # your application behaves in the production environment, where an error page will
   # be rendered instead.
   #
   # Sometimes we want to override this default behaviour and allow Rails to rescue
@@ -50,9 +49,12 @@ Spork.each_run do
   # recommended as it will mask a lot of errors for you!
   #
   ActionController::Base.allow_rescue = false
-  
+
   # Remove this line if your app doesn't have a database.
   # For some databases (like MongoDB and CouchDB) you may need to use :truncation instead.
   DatabaseCleaner.strategy = :transaction
 
 end
+
+require 'selenium/client'
+Capybara.javascript_driver = :akephalos

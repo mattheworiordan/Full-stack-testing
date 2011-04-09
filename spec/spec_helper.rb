@@ -1,4 +1,3 @@
-require 'rubygems'
 require 'spork'
 
 Spork.prefork do
@@ -42,9 +41,6 @@ end
 # These instructions should self-destruct in 10 seconds.  If they don't, feel
 # free to delete them.
 
-
-
-
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 ENV["RAILS_ENV"] ||= 'test'
 require File.expand_path("../../config/environment", __FILE__)
@@ -53,6 +49,9 @@ require 'rspec/rails'
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
 Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
+
+require 'capybara/rspec'
+Capybara.javascript_driver = :selenium
 
 RSpec.configure do |config|
   # == Mock Framework
@@ -71,4 +70,16 @@ RSpec.configure do |config|
   # examples within a transaction, remove the following line or assign false
   # instead of true.
   config.use_transactional_fixtures = true
+
+  config.include Capybara
+
+  config.before(:each) do
+    Capybara.current_driver = :akephalos if example.metadata[:js]
+    Capybara.current_driver = example.metadata[:driver] if example.metadata[:driver]
+  end
+
+  config.after(:each) do
+    Capybara.use_default_driver if example.metadata[:js]
+    Capybara.use_default_driver if example.metadata[:driver]
+  end
 end
