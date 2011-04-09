@@ -2,8 +2,9 @@ require 'growl'
 require 'open3'
 
 ENV["WATCHR"] = "1"
-$spec_cmd = "rspec --tty --drb --colour --format nested"
-$cuke_cmd = "cucumber --color --drb --require features/step_definitions --require features/support"
+# remove --drb support for RSpec & Cucumber because of Akephalos issue at https://github.com/bernerdschaefer/akephalos/issues/#issue/60
+$spec_cmd = "rspec --tty --colour --format nested"
+$cuke_cmd = "cucumber --color --require features/step_definitions --require features/support"
 $pass = File.join(File.expand_path(File.dirname(__FILE__)), '.watchr_images', 'pass.png')
 $fail = File.join(File.expand_path(File.dirname(__FILE__)), '.watchr_images', 'fail.png')
 $pending = File.join(File.expand_path(File.dirname(__FILE__)), '.watchr_images', 'pending.png')
