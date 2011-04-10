@@ -125,5 +125,6 @@ watch('app/.*\.rb') { |m| related_specs(m[0]).map {|tf| run_spec tf } }
 watch('features/support/.*') { |m| run_all_features }
 watch('features/step_definitions/.*') { |m| run_all_features }
 watch('features/.*\.feature') { |m| run_feature m[0] }
+watch('public/javascripts/.*\.js') { |m| run_all_features }
 
 puts File.expand_path(File.dirname(__FILE__))

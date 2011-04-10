@@ -1,0 +1,26 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                    "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+  <head>
+    <title>QUnit Tests</title>
+    <%= render :partial => '/layouts/header' %>
+
+    <%= stylesheet_link_tag 'vendor/qunit' %>
+    <%= javascript_include_tag 'vendor/qunit' %>
+
+    <script language="Javascript">
+$(document).ready(function() {
+  <%= yield %>
+});
+    </script>
+  </head>
+
+  <body>
+    <h1 id="qunit-header">QUnit example</h1>
+    <h2 id="qunit-banner"></h2>
+    <div id="qunit-testrunner-toolbar"></div>
+    <h2 id="qunit-userAgent"></h2>
+    <ol id="qunit-tests"></ol>
+    <div id="qunit-fixture">test markup, will be hidden</div>
+  </body>
+</html>

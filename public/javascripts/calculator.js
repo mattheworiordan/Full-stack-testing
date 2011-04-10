@@ -41,46 +41,59 @@ function Calculator() {
     this.sendAjaxOperation('squared');
   }
 
-  this.sendAjaxOperation = function(operation) {
-    var payLoad = {
+  // update the calculator with data from an AJAX call
+  this.updateCalculator = function(data) {
+    $('#calculator>.value').text(data.value);
+    $('#calculator>ul.history li').remove();
+    $.each(data.history, function(index, historyLine) {
+      li = $('<li/>');
+      li.text(historyLine);
+      $('#calculator>ul.history').append(li);
+    });
+    $('#calculator input[type=hidden]#history').val(data.history.join('|'));
+    $('#message-holder').html('');
+  }
+
+  // ajax error callback
+  this.ajaxError = function(jqXHR, textStatus, errorThrown) {
+    console.log(arguments);
+    var message = 'A server error occured, sorry we could not perform this operation.';
+    try {
+      message = eval('a = ' + jqXHR.responseText).message;
+    } catch (e) {
+      // ignore if there is no JSON error message and use default message
+      console.log(e);
+    }
+    $('#message-holder').html('<div class="flash-error">' + message + '</div>');
+  }
+
+  this.sendAjaxOperation = function(operation, options) {
+    var options = $.extend({
+      failureCallback: this.ajaxError,
+      successCallback: this.updateCalculator,
       value: $.trim($('#calculator>.value').text()),
-      method: operation,
       modify_value: $.trim($('#calculator input[type=text]#modify_value').val()),
-      history:
-        $.map($('#calculator>ul.history li'), function(historyItem) {
+      history: $.map($('#calculator>ul.history li'), function(historyItem) {
           return ($(historyItem).text());
         }).join('|')
+    }, options || []);
+
+    var payLoad = {
+      value: String(options['value']),
+      method: operation,
+      modify_value: String(options['modify_value']),
+      history: options['history']
     }
     // Default JSON-request options.
     var params = {
-      url:          document.location.href,
+      url:          '/calculator',
       type:         'PUT',
       contentType:  'application/json',
       data:         JSON.stringify(payLoad),
       dataType:     'json',
       processData:  false,
-      success:      function(data) {
-        $('#calculator>.value').text(data.value);
-        $('#calculator>ul.history li').remove();
-        $.each(data.history, function(index, historyLine) {
-          li = $('<li/>');
-          li.text(historyLine);
-          $('#calculator>ul.history').append(li);
-        });
-        $('#calculator input[type=hidden]#history').val(data.history.join('|'));
-        $('#message-holder').html('');
-      },
-      error:        function(jqXHR, textStatus, errorThrown) {
-        console.log(arguments);
-        var message = 'A server error occured, sorry we could not perform this operation.';
-        try {
-          message = eval('a = ' + jqXHR.responseText).message;
-        } catch (e) {
-          // ignore if there is no JSON error message and use default message
-          console.log(e);
-        }
-        $('#message-holder').html('<div class="flash-error">' + message + '</div>');
-      }
+      success:      options['successCallback'],
+      error:        options['failureCallback']
     };
     $.ajax(params);
   }

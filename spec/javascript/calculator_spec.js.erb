@@ -1,0 +1,52 @@
+module("Calculator");
+
+test("calculator Class can be created", function() {
+  var calc = new Calculator();
+  equals (typeof(calc), 'object', "new Calculator class should be a new object");
+});
+
+test('calculator can perform basic operations', 2, function() {
+  var calc = new Calculator();
+  equals (calc.sum(5,10), 15, 'Simple addition');
+  equals (calc.multiple(5,5), 25, 'Simple multiplication');
+});
+
+test('AJAX addition operation', 2, function() {
+  stop(5000); // wait for up to 5 seconds
+  var calc = new Calculator();
+  calc.sendAjaxOperation('+', {
+    value: 10,
+    modify_value: 25,
+    history: '',
+    failureCallback: function() {
+      ok(false, 'AJAX request failed');
+      start();
+    },
+    successCallback: function(data) {
+      equals (data.value, 35);
+      equals (data.history.length, 1);
+      start();
+    }
+  });
+});
+
+test('AJAX squared operation with history', 4, function() {
+  stop(5000); // wait for up to 5 seconds
+  var calc = new Calculator();
+  calc.sendAjaxOperation('squared', {
+    value: 10,
+    modify_value: 0,
+    history: '1|2|3',
+    failureCallback: function() {
+      ok(false, 'AJAX request failed');
+      start();
+    },
+    successCallback: function(data) {
+      equals (data.value, 100);
+      equals (data.history.length, 4);
+      equals (data.history[0], 'square of 10 = 100');
+      equals (data.history[3], '3');
+      start();
+    }
+  });
+});
