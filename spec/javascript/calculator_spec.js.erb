@@ -51,18 +51,10 @@ test('AJAX squared operation with history', 4, function() {
   });
 });
 
-test('Wait up to 5 seconds but fail with timeout after 3.5 seconds', 1, function() {
-  stop(5000);
-  setTimeout(function() {
-    ok(false);
-    start();
-  }, 3500);
-});
-
-test('Wait up to 5 seconds but fail because timeout only invoked after 7.5 seconds', 1, function() {
+test('Wait up to 5 seconds and pass with setTimeout after 3.5 seconds', 1, function() {
   stop(5000);
   setTimeout(function() {
     ok(true);
     start();
-  }, 7500);
+  }, 3500);
 });
