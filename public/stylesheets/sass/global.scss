@@ -95,6 +95,9 @@ $calc_width: 340px;
   &.hover-for-drop {
     background-color: #FF0;
   }
+  a#clear-memory-bank {
+    display: none;
+  }
 }
 
 .home-links {

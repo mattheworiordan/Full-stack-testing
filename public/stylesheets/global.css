@@ -75,6 +75,8 @@ h2 {
     background-color: #FFD; }
   #memory-bank.hover-for-drop {
     background-color: #FF0; }
+  #memory-bank a#clear-memory-bank {
+    display: none; }
 
 .home-links {
   clear: left; }
