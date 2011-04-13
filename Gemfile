@@ -2,6 +2,7 @@ source 'http://rubygems.org'
 
 gem 'rails', '3.0.3'
 gem 'haml'
+gem 'awesome_print', :require => 'ap', :git => 'git://github.com/michaeldv/awesome_print.git'
 
 group :development, :test do
   gem 'sqlite3-ruby', :require => 'sqlite3'
@@ -18,4 +19,5 @@ group :test do
   gem 'akephalos'
   gem 'selenium'
   gem 'selenium-client'
+  gem 'nokogiri' # used to parse HTML output form QUnit tests
 end

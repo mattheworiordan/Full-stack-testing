@@ -1,3 +1,9 @@
+GIT
+  remote: git://github.com/michaeldv/awesome_print.git
+  revision: 0f14846fcd7356cabde6bfb40be6c5529eccfbdf
+  specs:
+    awesome_print (0.3.2)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -145,11 +151,13 @@ PLATFORMS
 
 DEPENDENCIES
   akephalos
+  awesome_print!
   capybara
   cucumber-rails (>= 0.4.0)
   database_cleaner
   haml
   launchy
+  nokogiri
   rails (= 3.0.3)
   rspec
   rspec-rails

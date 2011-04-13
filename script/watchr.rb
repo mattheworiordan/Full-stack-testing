@@ -120,6 +120,7 @@ end
 watch('spec/spec_helper\.rb') { run_all_specs }
 watch('spec/support/.*') { run_all_specs }
 watch('spec/.*_spec\.rb') { |m| run_spec m[0] }
+watch('spec/javascript/.*_spec\.js') { |m| run_spec 'spec/javascript/runner.rb' }
 watch('spec/.*\.rb') { |m| run_spec m[0] }
 watch('app/.*\.rb') { |m| related_specs(m[0]).map {|tf| run_spec tf } }
 watch('features/support/.*') { |m| run_all_features }
