@@ -35,7 +35,10 @@ $(document).ready(function() {
     // add a prompt so we can test this
     $('.operations input[type=submit]').click(function(event) {
       if ($('#calculator input[type=text]#modify_value').val() == 0) {
-        if (!confirm('Are you sure you want to perform this operation on a zero value.  If not, press cancel and enter a value before performing an operation.')) {
+        if ($(event.target).val() == '/') {
+          event.preventDefault();
+          alert('You cannot divide by zero');
+        } else if (!confirm('Are you sure you want to perform this operation on a zero value.  If not, press cancel and enter a value before performing an operation.')) {
           event.preventDefault();
         }
       }

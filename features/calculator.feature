@@ -57,7 +57,7 @@ Feature: Calculator
     When I press "√"
       Then I should see "5" within ".value"
 
-  @selenium
+  @javascript
   Scenario: Test a JQuery UI dialog
     Given I am on the calculator page
     When I press "2"
@@ -68,3 +68,45 @@ Feature: Calculator
     When I press "Yes"
     Then I should see "0" within ".value"
       And I should not see "2" within ".history"
+
+  @selenium
+  Scenario: Test drag and drop functionality
+    Given I am on the calculator page
+    When I press "3"
+      And I press "+"
+      And I press "3"
+      And I press "*"
+    Then I should see "9"
+    When I drag the value to the memory bank
+    Then the memory bank should contain "9"
+
+  @javascript
+  Scenario: Ensure that user is asked to continue when performing an operation on a zero value
+    Given I am on the calculator page
+      And I expect to click "Cancel" on a confirmation box saying "Are you sure you want to perform this operation on a zero value.  If not, press cancel and enter a value before performing an operation."
+    When I press "+"
+    Then the confirmation box should have been displayed
+      And I should not see "0" within ".history"
+
+  @javascript
+  Scenario: Ensure the user is prevented from dividing by zero once Javascript is enabled
+    Given I am on the calculator page
+      And I expect to click on an alert box saying "You cannot divide by zero"
+    When I press "/"
+    Then the alert box should have been displayed
+      And I should not see "0" within ".history"
+
+  @selenium
+  Scenario: Ensure history is retained in cookies
+    Given I am on the calculator page
+      And the memory bank is cleared
+    When I press "3"
+      And I press "+"
+      And I press "3"
+      And I press "*"
+    Then I should see "9"
+    When I drag the value to the memory bank
+    Then the memory bank should contain "9"
+    When I follow "Home"
+      And I follow "Use the calculator"
+    Then the memory bank should contain "9"
