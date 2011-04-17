@@ -69,17 +69,24 @@ RSpec.configure do |config|
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
   # instead of true.
-  config.use_transactional_fixtures = true
+  config.use_transactional_fixtures = false
 
   config.include Capybara
 
   config.before(:each) do
     Capybara.current_driver = :akephalos if example.metadata[:js]
     Capybara.current_driver = example.metadata[:driver] if example.metadata[:driver]
+    if Capybara.current_driver != :rack_test
+      DatabaseCleaner.strategy = :transaction
+    else
+      DatabaseCleaner.strategy = :truncation
+    end
+    DatabaseCleaner.start
   end
 
   config.after(:each) do
     Capybara.use_default_driver if example.metadata[:js]
     Capybara.use_default_driver if example.metadata[:driver]
+    DatabaseCleaner.clean
   end
 end
