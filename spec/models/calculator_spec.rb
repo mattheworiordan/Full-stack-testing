@@ -31,7 +31,7 @@ describe Calculator do
     end
   end
 
-  describe '#mutliply' do
+  describe '#multiply' do
     it 'returns 0 when multiplying by 5 using a new calculator with value 0' do
       calc = Calculator.new
       calc.multiply(5).should == 0
