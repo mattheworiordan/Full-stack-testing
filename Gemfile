@@ -6,6 +6,8 @@ gem 'awesome_print', :require => 'ap', :git => 'git://github.com/michaeldv/aweso
 
 group :development, :test do
   gem 'sqlite3-ruby', :require => 'sqlite3'
+  gem 'growl'
+  gem 'watchr'
 end
 
 group :test do
