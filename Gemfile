@@ -19,6 +19,7 @@ group :test do
   gem 'spork', '~> 0.9.0.rc'
   gem 'launchy'
   gem 'akephalos'
+  gem 'capybara-webkit'
   gem 'selenium'
   gem 'selenium-client'
   gem 'nokogiri' # used to parse HTML output form QUnit tests

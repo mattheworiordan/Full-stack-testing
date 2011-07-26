@@ -51,7 +51,7 @@ require 'rspec/rails'
 Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
 
 require 'capybara/rspec'
-Capybara.javascript_driver = :selenium
+Capybara.javascript_driver = :webkit
 
 RSpec.configure do |config|
   # == Mock Framework
@@ -74,7 +74,7 @@ RSpec.configure do |config|
   config.include Capybara
 
   config.before(:each) do
-    Capybara.current_driver = :akephalos if example.metadata[:js]
+    Capybara.current_driver = :webkit if example.metadata[:js]
     Capybara.current_driver = example.metadata[:driver] if example.metadata[:driver]
     if Capybara.current_driver != :rack_test
       DatabaseCleaner.strategy = :transaction

@@ -57,4 +57,4 @@ Spork.each_run do
 end
 
 require 'selenium/client'
-Capybara.javascript_driver = :akephalos
+Capybara.javascript_driver = :webkit

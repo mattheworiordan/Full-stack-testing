@@ -9,7 +9,7 @@ describe "the calculator", :type => :request do
     end
   end
 
-  it "has a calculator object in the global space", :driver => :selenium do
+  it "has a calculator object in the global space", :js => :selenium do
     visit calculator_path
     within("#calculator") do
       click_button '1'

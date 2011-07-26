@@ -69,7 +69,7 @@ Feature: Calculator
     Then I should see "0" within ".value"
       And I should not see "2" within ".history"
 
-  @selenium
+  @javascript
   Scenario: Test drag and drop functionality
     Given I am on the calculator page
     When I press "3"
@@ -96,7 +96,7 @@ Feature: Calculator
     Then the alert box should have been displayed
       And I should not see "0" within ".history"
 
-  @selenium
+  @javascript
   Scenario: Ensure history is retained in cookies
     Given I am on the calculator page
       And the memory bank is cleared
